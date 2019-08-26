@@ -1,0 +1,39 @@
+{{define "orders/manager_index"}}
+{{template "admin_header" .}}
+{{template "manager_navbar" .}}
+
+<div id="one-column">
+  <h1>{{.Title}}</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="shrink">#</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Date</th>
+        <th class="shrink">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .Orders}}
+        <tr>
+          <td class="shrink">{{.ID}}</td>
+          <td>{{.FirstName}} {{.MiddleName}} {{.LastName}}</td>
+          <td>{{.Phone}}</td>
+          <td>{{.Email}}</td>
+          <td>{{formatDateTime .CreatedAt}}</td>
+          <td class="shrink">
+            <a href="/manager/orders/{{.ID}}" class="btn btn-sm btn-outline-primary">View</a>
+          </td>
+        </tr>
+      {{else}}
+        <tr>
+          <td colspan="6" class="text-center">The list of orders is empty</td>
+        </tr>
+      {{end}}
+    </tbody>
+  </table>
+</div>
+{{template "footer" .}}
+{{end}}

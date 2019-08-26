@@ -1,0 +1,22 @@
+{{define "emails/admin_order"}}
+<html>
+  <head>
+  </head>
+  <body>
+
+    <p>New sales order on {{domain}}.</p>
+    <p>Customer Name: {{.Order.FirstName}} {{.Order.MiddleName}} {{.Order.LastName}}.</p>
+    <p>Contact Phone: {{.Order.Phone}}.</p>
+    <p>Email: {{.Order.Email}}.</p>
+    <p>Date of Order: {{formatDateTime .Order.CreatedAt}}.</p>
+    <p>Customer Notes: {{.Order.Comment}}.</p>
+
+    <p>Ordered Items:</p>
+    {{range .Order.Products}}
+      <p><a href="{{domain}}{{.URL}}" target="_blank">{{.Title}}. {{.Code}}</a></p>
+    {{end}}
+
+    <p>This email was sent automatically, no need to reply to it.</p>
+  </body>
+</html>
+{{end}}

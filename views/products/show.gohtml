@@ -1,0 +1,54 @@
+{{define "products/show"}}
+{{template "header" .}}
+
+<article id="one-column" class="container products-show">
+  {{template "breadcrumbs" .}}
+  <div class="row align-items-stretch">
+    <div class="col-sm-4 col-md-4 mb-4">
+      {{if len .DefaultImage | lt 0}}
+        <div class="image-wrapper">
+          <a href="#" data-featherlight="{{.DefaultImage}}">
+            <img src="{{.DefaultImage}}" class="img-fluid" />
+            <span class="zoom">Zoom</span>
+          </a>
+        </div>
+      {{else}}
+        Show Blank Image
+      {{end}}
+      
+      {{if len .Product.Images | lt 1}}
+        <p class="text-center small">Click to zoom the image</p>
+        <div class="image-previews row">
+          {{range .Product.Images}}
+            <div class="col-sm-4">
+              <a href="{{.URL}}">
+                <img class="img-fluid" src="{{.URL}}" />
+              </a>
+            </div>
+            
+          {{end}}
+        </div>
+      {{end}}
+    </div>
+
+    <div class="col-sm-8 col-md-8 mb-4">
+      <div class="content">
+        <h1>{{.Product.Title}}</h1>
+        <div class="description">
+          {{noescape .Product.Description}}
+        </div>
+        {{if .ShowAddToCart}}
+          <div class="mt-2">
+            <form action="/cart/add/{{.Product.ID}}" method="POST">
+              <input type="hidden" name="_csrf" value="{{$.Csrf}}">
+              <button type="button" class="btn btn-secondary" onclick="onAddToCart(this)"><i class="fa fa-shopping-cart mr-2"></i> Add to Cart</button>
+            </form>
+          </div>
+        {{end}}
+      </div>
+    </div>
+  </div>
+</article>
+
+{{template "footer" .}}
+{{end}}

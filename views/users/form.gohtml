@@ -1,0 +1,84 @@
+{{define "users/form"}}
+{{template "admin_header" .}}
+{{template "admin_navbar" .}}
+
+<div id="one-column">
+  <h1>{{.Title}}</h1>
+  <form method="post" data-parsley-validate>
+    {{template "flashes" .}}
+    <input type="hidden" name="id" value="{{.User.ID}}" >
+    <input type="hidden" name="_csrf" value="{{.Csrf}}">
+
+    <div class="form-row form-group">
+      <div class="col-4">
+        <label class="control-label" for="last_name">Last Name</label>
+        <input id="last_name" name="last_name" value="{{.User.LastName}}" class="form-control" required>
+      </div>
+
+      <div class="col-4">
+        <label class="control-label" for="first_name">First Name</label>
+        <input id="first_name" name="first_name" value="{{.User.FirstName}}" class="form-control" autofocus required>
+      </div>
+
+      <div class="col-4">
+        <label class="control-label" for="middle_name">Middle Name</label>
+        <input id="middle_name" name="middle_name" value="{{.User.MiddleName}}" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-row form-group">
+      <div class="col-6">
+        <label class="control-label" for="category_id">Role</label>
+        <select id="role" name="role" class="form-control">
+          {{range userRoles}}
+            {{if eq $.User.Role .Value}}
+              <option value="{{.Value}}" selected>{{.Text}}</option>  
+            {{else}}
+              <option value="{{.Value}}">{{.Text}}</option>
+            {{end}}
+          {{end}}
+        </select>
+      </div>
+
+      <div class="col-6">
+        <label class="control-label" for="email">Email</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">@</span>
+          </div>
+          <input id="email" name="email" value="{{.User.Email}}" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row form-group">
+      <div class="col-6">
+        <label class="control-label" for="password">Password</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
+          </div>
+          <input id="password" name="password" type="password" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <label class="control-label" for="passwordrepeat">Password Confirm</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"></i></span>
+          </div>
+          <input id="passwordrepeat" name="passwordrepeat" type="password" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" value="Save">
+      <a class="btn btn-outline-secondary" href="/admin/users">Cancel</a>
+    </div>
+  </form>
+</div>
+
+{{template "footer" .}}
+{{end}}

@@ -1,0 +1,40 @@
+{
+  "debug": {
+    "public": "public",
+    "domain": "http://localhost:8081",
+    "session_secret": "session-secret-phrase",
+    "signup_enabled": true,
+    "database": {
+      "host": "127.0.0.1",
+      "name": "panteon_dev",
+      "user": "your_db_user",
+      "password": "your_db_user_password"
+    },
+    "smtp": {
+      "from": "your@email.com",
+      "smtp": "smtp.email.com",
+      "port": "465",
+      "user": "your@email.com",
+      "password": "email_password"
+    }
+  },
+  "release": {
+    "public": "public",
+    "domain": "http://mydomain.com",
+    "session_secret": "session-secret-phrase",
+    "signup_enabled": false,
+    "database": {
+      "host": "127.0.0.1",
+      "name": "panteon",
+      "user": "your_db_user",
+      "password": "your_db_user_password"
+    },
+    "smtp": {
+      "from": "your@email.com",
+      "smtp": "smtp.email.com",
+      "port": "465",
+      "user": "your@email.com",
+      "password": "email_password"
+    }
+  }
+}

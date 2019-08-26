@@ -1,0 +1,19 @@
+{{define "home/show"}}
+{{template "header" .}}
+
+{{template "carousel" .}}
+
+{{template "trending" .}}
+
+<article class="home section-xl" role="main">
+  <div class="container">
+    <h1 class="text-center">{{.Title}}</h1>
+
+    <div class="description">
+      {{noescape .Page.Description}}
+    </div>
+  </div>
+</article>
+
+{{template "footer" .}}
+{{end}}

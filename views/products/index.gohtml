@@ -1,0 +1,57 @@
+{{define "products/index"}}
+{{template "admin_header" .}}
+{{template "admin_navbar" .}}
+
+<div id="one-column">
+  {{template "flashes" .}}
+  
+  <h1>{{.Title}}</h1>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="shrink">#</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th class="shrink">Published</th>
+        <th class="shrink">Recommended</th>
+        <th class="shrink">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .Products}}
+        <tr data-url="/admin/products/{{.ID}}/edit">
+          <td class="shrink">{{.ID}}</td>
+          <td>{{.Title}}</td>
+          <td>{{.Category.Title}}</td>
+          <td class="shrink">
+            {{if .Published}}
+              <span class="fa fa-check"></span>
+            {{else}}
+              <span class="fa fa-times"></span>
+            {{end}}
+          </td>
+          <td class="shrink">
+            {{if .Recommended}}
+              <span class="fa fa-check"></span>
+            {{end}}
+          </td>
+          <td class="shrink">
+            <a href="{{.URL}}" class="btn btn-sm btn-outline-primary">View</a>
+            <a href="/admin/products/{{.ID}}/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <form class="inline-block" action="/admin/products/{{.ID}}/delete" method="post">
+              <input type="hidden" name="_csrf" value="{{$.Csrf}}">
+              <button type="button" class="btn btn-sm btn-outline-danger" onclick="((confirm('Are you sure?')) ? this.form.submit() : null);">Remove</button>
+            </form>
+          </td>
+        </tr>
+      {{end}}
+    </tbody>
+  </table>
+  <div class="actions">
+    <a href="/admin/new_product" class="btn btn-primary">New Product</a>
+  </div>
+</div>
+
+{{template "footer" .}}
+{{end}}

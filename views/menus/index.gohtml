@@ -1,0 +1,43 @@
+{{define "menus/index"}}
+{{template "admin_header" .}}
+{{template "admin_navbar" .}}
+
+<div id="one-column">
+  {{template "flashes" .}}
+  
+  <h1>{{.Title}}</h1>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="shrink">#</th>
+        <th>Title</th>
+        <th>Code</th>
+        <th class="shrink">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .Menus}}
+        <tr data-url="/admin/menu/{{.ID}}">
+          <td class="shrink">{{.ID}}</td>
+          <td>{{.Title}}</td>
+          <td>{{.Code}}</td>
+          <td class="shrink">
+            <a href="/admin/menu/{{.ID}}" class="btn btn-sm btn-outline-primary">Items</a>
+            <a href="/admin/menu/{{.ID}}/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <form class="inline-block" action="/admin/menu/{{.ID}}/delete" method="post">
+              <input type="hidden" name="_csrf" value="{{$.Csrf}}">
+              <button type="button" class="btn btn-sm btn-outline-danger" onclick="((confirm('Are you sure?')) ? this.form.submit() : null);">Remove</button>
+            </form>
+          </td>
+        </tr>
+      {{end}}
+    </tbody>
+  </table>
+  <div class="actions">
+    <a href="/admin/new_menu" class="btn btn-secondary">New Menu</a>
+  </div>
+</div>
+
+{{template "footer" .}}
+{{end}}

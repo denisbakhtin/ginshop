@@ -1,0 +1,44 @@
+{{define "auth/manager_manage"}}
+{{template "admin_header" .}}
+{{template "manager_navbar" .}}
+
+<div id="one-column">
+  <div class="signup-wrapper">
+    <h1>Your account details</h1>
+    <div class="form-wrapper">
+      <form method="post">
+        {{template "flashes" .}}
+        <input type="hidden" name="_csrf" value="{{.Csrf}}">
+
+        <div class="form-group">
+          <input id="first_name" name="first_name" placeholder="First name *" class="form-control" value="{{.Manage.FirstName}}" required>
+        </div>
+        <div class="form-group">
+          <input id="middle_name" name="middle_name" placeholder="Middle name" class="form-control" value="{{.Manage.MiddleName}}">
+        </div>
+        <div class="form-group">
+          <input id="last_name" name="last_name" placeholder="Last name *" class="form-control" value="{{.Manage.LastName}}" required>
+        </div>
+        
+        <div class="form-group">
+          <input id="email" name="email" type="email" class="form-control" placeholder="Email *" readonly value="{{.Manage.Email}}">
+        </div>
+
+        <div class="form-group">
+          <input id="password" name="password" type="password" placeholder="Password *" class="form-control" required value="{{.Manage.Password}}">
+        </div>
+
+        <div class="form-group">
+          <input id="password_confirm" name="password_confirm" type="password" placeholder="Password confirm *" class="form-control" required value="{{.Manage.PasswordConfirm}}">
+        </div>
+
+        <p class="text-muted">* - required fields.</p>
+        <div class="text-center">
+          <button type="submit" class="btn btn-secondary btn-lg">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{template "footer" .}}
+{{end}}

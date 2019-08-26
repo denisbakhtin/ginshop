@@ -1,0 +1,25 @@
+{{define "trending"}}
+<section class="section section-xl bg-yellow trending">
+    <div class="container">
+        <h2>Trending Products</h2>
+        <div class="row">
+            {{range $i, $v := recommendedProducts}}
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card card-body" data-aos="{{if lt $i 4}}fade-left{{else}}fade-right{{end}}" data-aos-delay="100">
+                    <div class="figure" style='background: url("{{.DefaultImage}}")'>
+                    </div>
+                    <h5><a href="{{.URL}}">{{.Title}}</a></h5>
+                    <div class="button-wrap">
+                        <a href="{{.URL}}" class="product-btn view-product mr-2"><i class="fa fa-share"></i></a>
+                        <form action="/cart/add/{{.ID}}" method="POST">
+                            <input type="hidden" name="_csrf" value="{{$.Csrf}}">
+                            <button type="button" class="product-btn add-to-cart" onclick="onAddToCart(this)"><i class="fa fa-shopping-cart"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {{end}}
+        </div>
+    </div>
+</section>
+{{end}}

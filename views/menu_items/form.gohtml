@@ -1,0 +1,62 @@
+{{define "menu_items/form"}}
+{{template "admin_header" .}}
+{{template "admin_navbar" .}}
+
+<div id="one-column">
+  <h1>{{.Title}}</h1>
+
+  <form method="post">
+    <fieldset>
+      {{template "flashes" .}}
+      <input type="hidden" name="id" value="{{.Item.ID}}">
+      <input type="hidden" name="menu_id" value="{{.Item.MenuID}}">
+      <input type="hidden" name="_csrf" value="{{.Csrf}}">
+      
+      <div class="form-group">
+        <label class="control-label" for="title">Title</label>
+        <input id="title" name="title" value="{{.Item.Title}}" class="form-control" autofocus required="" >
+      </div>
+
+      <div class="form-row form-group">
+        <div class="col-6">
+          <label class="control-label" for="parent_id">Parent Item</label>
+          <select id="parent_id" name="parent_id" class="form-control">
+            <option value="">-</option>
+            {{range topLevelMenuItems $.Item.MenuID}}
+              {{if refEqUint $.Item.ParentID .ID}}
+                <option value="{{.ID}}" selected>{{.Title}}</option>  
+              {{else}}
+                <option value="{{.ID}}">{{.Title}}</option>
+              {{end}}
+            {{end}}
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label class="control-label" for="url">URL</label>
+          <input id="url" name="url" value="{{.Item.URL}}" class="form-control" required="" >
+        </div>
+      </div>
+
+      <div class="form-row form-group">
+        <div class="col-4">
+          <label class="control-label" for="ord">Priority</label>
+          <input id="ord" name="ord" value="{{.Item.Ord}}" type="number" class="form-control">
+        </div>
+
+        <div class="col-8">
+          <label class="control-label" for="ord">CSS Class</label>
+          <input id="class" name="class" value="{{.Item.Class}}" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Save">
+        <a class="btn btn-outline-secondary" href="/admin/menu/{{.Item.MenuID}}">Cancel</a>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+{{template "footer" .}}
+{{end}}

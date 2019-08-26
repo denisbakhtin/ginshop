@@ -1,0 +1,38 @@
+{{define "categories/show"}}
+{{template "header" .}}
+
+<div id="one-column" class="category-show container">
+  {{template "breadcrumbs" .}}
+  <h1>{{.Title}}</h1>
+  
+  {{if len .Category.Products | lt 0}}
+    <div class="row">
+      {{range $i, $v := .Category.Products}}
+      <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="card card-body" data-aos="{{if lt $i 4}}fade-left{{else}}fade-right{{end}}" data-aos-delay="100">
+              <div class="figure" style='background: url("{{.DefaultImage}}")'>
+              </div>
+              <h5><a href="{{.URL}}">{{.Title}}</a></h5>
+              <div class="button-wrap">
+                  <a href="{{.URL}}" class="product-btn view-product mr-2"><i class="fa fa-share"></i></a>
+                  <form action="/cart/add/{{.ID}}" method="POST">
+                      <input type="hidden" name="_csrf" value="{{$.Csrf}}">
+                      <button type="button" class="product-btn add-to-cart" onclick="onAddToCart(this)"><i class="fa fa-shopping-cart"></i></button>
+                  </form>
+              </div>
+          </div>
+      </div>
+      {{end}}
+    </div>
+  {{else}}
+    <p>The product category is being filled.</p>
+  {{end}}
+  {{if isNotBlank .Category.Description}}
+    <div class="description mt-4">
+      {{noescape .Category.Description}}
+    </div>
+  {{end}}
+</div>
+
+{{template "footer" .}}
+{{end}}

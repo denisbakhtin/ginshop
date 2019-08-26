@@ -1,0 +1,40 @@
+{{define "cart/show"}}
+{{template "header" .}}
+
+<article id="one-column" class="container cart">
+  <h1>{{.Title}}</h1>
+  {{if len .Products | eq 0}}
+    <p class="strong">Your cart is empty.</p>
+    <p>Return to <a href="/">Home Page</a>.</p>
+  {{else}}
+    <table class="table table-bottom-bordered">
+      <thead>
+        <tr>
+          <th class="shrink"></th>
+          <th>Product</th>
+          <th class="shrink"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Products}}
+          <tr>
+            <td class="shrink"><img src="{{.DefaultImage}}" /></td>
+            <td><a href="{{.URL}}">{{.Title}}</a></td>
+            <td class="shrink">
+              <form action="/cart/delete/{{.ID}}" method="POST">
+                <input type="hidden" name="_csrf" value="{{$.Csrf}}">
+                <button type="submit" class="btn btn-outline-danger">Remove</button>
+              </form>
+            </td>
+          </tr>
+        {{end}}
+      </tbody>
+    </table>
+    <div class="mt-4 text-center">
+      <a class="btn btn-secondary" href="/new_order">Confirm Order</a>
+    </div>
+  {{end}}
+</article>
+
+{{template "footer" .}}
+{{end}}

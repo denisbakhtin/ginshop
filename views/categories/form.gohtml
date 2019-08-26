@@ -1,0 +1,87 @@
+{{define "categories/form"}}
+{{template "admin_header" .}}
+{{template "admin_navbar" .}}
+
+<div id="one-column">
+  <h1>{{.Title}}</h1>
+
+  <form method="post">
+    <fieldset>
+      {{template "flashes" .}}
+      <input type="hidden" name="id" value="{{.Category.ID}}">
+      <input type="hidden" name="_csrf" value="{{.Csrf}}">
+      
+      <div class="form-group">
+        <label class="control-label" for="title">Title</label>
+        <input id="title" name="title" value="{{.Category.Title}}" class="form-control" autofocus required="" >
+      </div>
+
+      <div class="form-row form-group">
+        <div class="col-6">
+          <label class="control-label" for="parent_id">Parent Item</label>
+          <select id="parent_id" name="parent_id" class="form-control">
+            <option value="">-</option>
+            {{range topLevelCategories}}
+              {{if refEqUint $.Category.ParentID .ID}}
+                <option value="{{.ID}}" selected>{{.Title}}</option>  
+              {{else}}
+                <option value="{{.ID}}">{{.Title}}</option>
+              {{end}}
+            {{end}}
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label class="control-label" for="slug">URL Slug</label>
+          <input id="slug" name="slug" value="{{.Category.Slug}}" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="excerpt">Excerpt</label>
+        <input id="excerpt" name="excerpt" value="{{.Category.Excerpt}}" class="form-control" >
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="ck-content">Description</label>
+        <textarea name="description" id="ck-content">{{.Category.Description}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="meta_keywords">Meta Keywords</label>
+        <textarea name="meta_keywords" class="form-control" id="meta_keywords">{{.Category.MetaKeywords}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="meta_description">Meta Description</label>
+        <textarea name="meta_description" class="form-control" id="meta_description">{{.Category.MetaDescription}}</textarea>
+      </div>
+
+      <div class="form-row form-group">
+        <div class="col-4">
+          <label class="control-label" for="ord">Priority</label>
+          <input id="ord" name="ord" value="{{.Category.Ord}}" type="number" class="form-control">
+        </div>
+
+        <div class="col-8">
+          <label class="control-label" for="ord">CSS Class</label>
+          <input id="class" name="class" value="{{.Category.Class}}" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input id="published" name="published" type="checkbox" value="true" {{if .Category.Published}}checked{{end}} >
+        <label class="control-label" for="published">Published</label>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Save">
+        <a class="btn btn-outline-secondary" href="/admin/categories">Cancel</a>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<script src="/public/vendor/ckeditor.js"></script>
+{{template "footer" .}}
+{{end}}

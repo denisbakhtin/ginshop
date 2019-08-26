@@ -1,0 +1,18 @@
+{{define "errors/500"}}
+{{template "header" .}}
+
+<div id="one-column" class="container">
+  <div class="text-center">
+    <h1>500 Error</h1>
+    <div class="description">
+      <!-- custom error description >> << -->
+      <p>Navigate to <a href="/">Home Page</a>.</p>
+      {{if .Error}}
+        {{.Error}}
+      {{end}}
+    </div>
+  </div>
+</div>
+
+{{template "footer" .}}
+{{end}}

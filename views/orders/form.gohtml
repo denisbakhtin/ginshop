@@ -1,0 +1,70 @@
+{{define "orders/form"}}
+{{template "header" .}}
+
+<div id="one-column" class="container">
+  <form method="post" class="order-form">
+    <h1 class="text-center">{{.Title}}</h1>
+    <p class="text-center">To finish your order fill in your contact details.</p>
+    <fieldset>
+      {{template "flashes" .}}
+      <input type="hidden" name="_csrf" value="{{.Csrf}}">
+      
+      <div class="form-row form-group">
+        <div class="col-4">
+          <label class="control-label" for="last_name">Last Name</label>
+          <input id="last_name" name="last_name" value="{{.Order.LastName}}" class="form-control">
+          <small class="text-muted ml-1">Smith</small>
+        </div>
+
+        <div class="col-4">
+          <label class="control-label" for="first_name">First Name</label>
+          <input id="first_name" name="first_name" value="{{.Order.FirstName}}" class="form-control" required>
+          <small class="text-muted ml-1">Bill</small>
+        </div>
+
+        <div class="col-4">
+          <label class="control-label" for="middle_name">Middle Name</label>
+          <input id="middle_name" name="middle_name" value="{{.Order.MiddleName}}" class="form-control" required>
+          <small class="text-muted ml-1">William</small>
+        </div>
+      </div>
+
+      <div class="form-row form-group">
+        <div class="col-6">
+          <label class="control-label" for="phone">Contact Phone</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-phone"></i></span>
+            </div>
+            <input id="phone" name="phone" value="{{.Order.Phone}}" class="form-control" required>
+          </div>
+          <small class="text-muted ml-5">1 800 33-33-33</small>
+        </div>
+
+        <div class="col-6">
+          <label class="control-label" for="email">Email</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa fa-at"></i></span>
+            </div>
+            <input id="email" name="email" value="{{.Order.Email}}" type="email" class="form-control">
+          </div>
+          <small class="text-muted ml-5">smith@gmail.com</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="comment">Your notes</label>
+        <textarea name="comment" id="comment" class="form-control" placeholder="Your wishes, questions">{{.Order.Comment}}</textarea>
+      </div>
+
+      <div class="form-group text-center">
+        <input type="submit" class="btn btn-primary" value="Confirm">
+        <a class="btn btn-outline-secondary" href="/cart">Back to Cart</a>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+{{template "footer" .}}
+{{end}}

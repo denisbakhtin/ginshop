@@ -1,0 +1,44 @@
+{{define "auth/signup"}}
+{{template "header" .}}
+
+<div id="one-column">
+  <div class="signup-wrapper card card-body">
+    <h1 class="text-center">Sign up</h1>
+    <div class="form-wrapper">
+      <form method="post">
+        {{template "flashes" .}}
+        <input type="hidden" name="_csrf" value="{{.Csrf}}">
+
+        <div class="form-group">
+          <input id="first_name" name="first_name" placeholder="First name *" class="form-control">
+        </div>
+        <div class="form-group">
+          <input id="middle_name" name="middle_name" placeholder="Middle name" class="form-control">
+        </div>
+        <div class="form-group">
+          <input id="last_name" name="last_name" placeholder="Last name *" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <input id="email" name="email" type="email" placeholder="Email *" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <input id="password" name="password" type="password" placeholder="Password *" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <input id="password_confirm" name="password_confirm" type="password" placeholder="Password confirm *" class="form-control" required>
+        </div>
+
+        <p class="text-muted">* - required fields.</p>
+        <div class="text-center">
+          <button id="signup" name="signup" type="submit" class="btn btn-secondary btn-lg mb-3">Sign up</button><br/>
+          <a href="/signin">Sign in</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{{template "footer" .}}
+{{end}}

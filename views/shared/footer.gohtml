@@ -1,0 +1,28 @@
+{{define "footer"}}
+
+		<div id="footer">
+			<div class="container">
+				<div class="row mx-0" id="footer-menu">
+					{{range footerMenuItems}}
+						<div class="col-sm-6 col-md-3 mb-4">
+							<div class="footer-menu-header">{{.Title}}</div>
+							{{range .Children}}
+								<div class="footer-menu-item">
+									<i class="fa fa-chevron-right mr-2"></i><a href="{{safeURL .URL}}">{{.Title}}</a>
+								</div>	
+							{{end}}
+						</div><!-- col -->
+					{{end}}
+				</div><!--.row -->
+			</div>
+		</div>
+		
+		<a id="smooth-scroll" class="hidden" href="#"><i class="fa fa-chevron-up"></i></a>
+
+		{{template "orderconsult" .}}
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+		{{template "scripts" .}}
+  </body>
+</html>
+{{end}}

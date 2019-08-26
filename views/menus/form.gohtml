@@ -1,0 +1,34 @@
+{{define "menus/form"}}
+{{template "admin_header" .}}
+{{template "admin_navbar" .}}
+
+<div id="one-column">
+  <h1>{{.Title}}</h1>
+
+  <form method="post">
+    <fieldset>
+      {{template "flashes" .}}
+      <input type="hidden" name="id" value="{{.Menu.ID}}">
+      <input type="hidden" name="_csrf" value="{{.Csrf}}">
+      
+      <div class="form-row form-group">
+        <div class="col-6">
+          <label class="control-label" for="title">Title</label>
+          <input id="title" name="title" value="{{.Menu.Title}}" class="form-control" required="" >
+        </div>
+        <div class="col-6">
+          <label class="control-label" for="code">Code</label>
+          <input id="code" name="code" value="{{.Menu.Code}}" class="form-control" required="" >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Save">
+        <a class="btn btn-outline-secondary" href="/admin/menus">Cancel</a>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+{{template "footer" .}}
+{{end}}

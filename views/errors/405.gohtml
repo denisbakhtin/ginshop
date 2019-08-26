@@ -1,0 +1,17 @@
+{{define "errors/405"}}
+{{template "header" .}}
+
+<div id="one-column" class="container">
+  <div class="text-center">
+    <h1>405 Error</h1>
+    <div class="description">
+      <!-- custom error description >> << -->
+      {{if .Error}}
+        {{.Error}}
+      {{end}}
+    </div>
+  </div>
+</div>
+
+{{template "footer" .}}
+{{end}}

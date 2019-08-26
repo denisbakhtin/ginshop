@@ -1,0 +1,25 @@
+{{define "emails/order"}}
+<html>
+  <head>
+  </head>
+  <body>
+
+    <p>Good day, {{.Order.FirstName}} {{.Order.MiddleName}}!</p>
+
+    <p>
+      Your order has been accepted, our managers will contact you shortly! Thank you for chosing GinShop's services.
+    </p>
+    <p>Your order has been assigned a №{{.Order.ID}} number.</p>
+
+    <p>&nbsp;</p>
+    <p>---------------------</p>
+    <p>This email has been generated automatically, no need to reply to it.</p>
+
+    {{$tel1 := getSetting "tel_1"}}
+    {{$tel2 := getSetting "tel_2"}}
+    {{$tel3 := getSetting "tel_3"}}
+    {{$email := getSetting "email"}}
+    <p>For all questions please call {{$tel1}}{{with $tel2}}, {{.}}{{end}}{{with $tel3}}, {{.}}{{end}}, or email: {{$email}}, <a href="{{domain}}">{{domain}}</a>.
+  </body>
+</html>
+{{end}}

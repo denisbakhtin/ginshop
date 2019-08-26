@@ -1,0 +1,26 @@
+{{define "manager_navbar"}}
+
+<!-- navbar -->
+<div class="navbar navbar-expand-lg admin-navbar navbar-dark bg-dark" role="navigation">
+  
+  <a class="navbar-brand d-flex align-items-center" href="/">
+    <img alt="ginshop logo" src="/public/images/logo.png" class="img-fluid float-left mr-2"/>        
+    <span class="company-name">GinShop</span><br/>
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav mr-auto flex-wrap">
+      <li class='nav-item {{isActiveLink $.Context "/manager/orders"}}'><a class="nav-link" href="/manager/orders">Orders</a></li>
+    </ul>
+    <ul class="navbar-nav flex-wrap">
+      <li class='nav-item {{isActiveLink $.Context "/manager/manage"}}'><a class="nav-link" href="/manager/manage">Account</a></li>
+      <li class="nav-item"><a class="nav-link" href="/signout">Sign out</a></li>
+    </ul>
+  </div><!--/.nav-collapse -->
+  
+</div> <!-- navbar -->
+{{end}}

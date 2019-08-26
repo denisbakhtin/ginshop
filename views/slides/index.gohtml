@@ -1,0 +1,42 @@
+{{define "slides/index"}}
+{{template "admin_header" .}}
+{{template "admin_navbar" .}}
+
+<div id="one-column">
+  {{template "flashes" .}}
+
+  <h1>{{.Title}}</h1>
+  
+  <table class="table table-hover table-slides">
+    <thead>
+      <tr>
+        <th class="shrink">#</th>
+        <th>Title</th>
+        <th>Image</th>
+        <th class="shrink">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .Slides}}
+        <tr data-url="/admin/slides/{{.ID}}/edit">
+          <td class="shrink">{{.ID}}</td>
+          <td>{{.Title}}</td>
+          <td><img src="{{.FileURL}}" class="img-thumbnail slide-preview" /></td>
+          <td class="shrink">
+            <a href="/admin/slides/{{.ID}}/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <form class="d-inline-block" action="/admin/slides/{{.ID}}/delete" method="post">
+              <input type="hidden" name="_csrf" value="{{$.Csrf}}">
+              <button type="button" class="btn btn-sm btn-outline-danger" onclick="((confirm('Are you sure?')) ? this.form.submit() : null);">Remove</button>
+            </form>
+          </td>
+        </tr>
+      {{end}}
+    </tbody>
+  </table>
+  <div class="mt-2">
+    <a href="/admin/new_slide" class="btn btn-secondary">New Slide</a>
+  </div>
+</div>
+
+{{template "footer" .}}
+{{end}}

@@ -1,0 +1,92 @@
+{{define "products/form"}}
+{{template "admin_header" .}}
+{{template "admin_navbar" .}}
+
+<div id="one-column">
+  <h1>{{.Title}}</h1>
+
+  <form method="post" id="product-form">
+    <fieldset>
+      {{template "flashes" .}}
+      <input type="hidden" name="id" value="{{.Product.ID}}">
+      <input type="hidden" name="_csrf" value="{{.Csrf}}">
+      
+      <div class="form-row form-group">
+        <div class="col-sm-12">
+          <label class="control-label" for="title">Title</label>
+          <input id="title" name="title" value="{{.Product.Title}}" class="form-control" autofocus required="" >
+        </div>
+      </div>
+
+      <div class="form-row form-group">
+        <div class="col-6">
+          <label class="control-label" for="category_id">Category</label>
+          <select id="category_id" name="category_id" class="form-control">
+            {{range selectableCategories}}
+              {{if eq $.Product.CategoryID .ID}}
+                <option value="{{.ID}}" selected>{{.Title}}</option>  
+              {{else}}
+                <option value="{{.ID}}">{{.Title}}</option>
+              {{end}}
+            {{end}}
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label class="control-label" for="slug">URL slug</label>
+          <input id="slug" name="slug" value="{{.Product.Slug}}" placeholder="Generated automatically" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="ck-content">Description</label>
+        <textarea name="description" id="ck-content">{{.Product.Description}}</textarea>
+      </div>
+
+      <div class="form-group upload-wrapper">
+        <label class="control-label">Images</label>
+        <input type="file" id="upload" name="upload" />
+        <div id="images" class="d-flex flex-row">
+          {{range .Product.Images}}
+            <div class="img-wrapper {{if eq $.Product.DefaultImageID .ID}}default{{end}}" data-id="{{.ID}}">
+              <img src="{{.URL}}" class="card-img-top" />
+              <div class="text-center mb-2 mt-auto">
+                <a href="#" class="btn btn-outline-secondary btn-sm remove-btn">Remove</a>
+              </div>
+            </div>
+          {{end}}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="meta_keywords">Meta Keywords</label>
+        <textarea name="meta_keywords" class="form-control" id="meta_keywords">{{.Product.MetaKeywords}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="meta_description">Meta Description</label>
+        <textarea name="meta_description" class="form-control" id="meta_description">{{.Product.MetaDescription}}</textarea>
+      </div>
+
+      <div class="form-group">
+        <input id="published" name="published" type="checkbox" value="true" {{if .Product.Published}}checked{{end}} >
+        <label class="control-label mr-4" for="published">Published</label>
+        <input id="recommended" name="recommended" type="checkbox" value="true" {{if .Product.Recommended}}checked{{end}} >
+        <label class="control-label mr-4" for="recommended">Recommended</label>
+      </div>
+      
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Save">
+        <a class="btn btn-outline-secondary" href="/admin/menus">Cancel</a>
+      </div>
+    </fieldset>
+    <input type="hidden" name="defaultimageid" id="default-image-id" value="{{.Product.DefaultImageID}}" />
+    {{range .Product.Images}}
+      <input type="hidden" name="imageids" value="{{.ID}}" id="imageids-{{.ID}}" />
+    {{end}}
+  </form>
+</div>
+
+<script src="/public/vendor/ckeditor.js"></script>
+{{template "footer" .}}
+{{end}}

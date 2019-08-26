@@ -1,0 +1,25 @@
+{{define "head"}}
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="{{.MetaDescription}}">
+	<meta name="keywords" content="{{.MetaKeywords}}">
+	<link rel="alternate" type="application/rss+xml" title="Marble rss" href="/rss" />
+	
+	{{template "favicon" .}}
+
+	<title>
+		{{if len .Title | lt 0}}
+			{{.Title}} | {{getSetting "title_suffix"}}
+		{{else}}
+			{{getSetting "title_suffix"}}
+		{{end}}
+	</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=cyrillic" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Neucha&display=swap&subset=cyrillic" rel="stylesheet">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+	<link rel="stylesheet" href="/public/assets/main.css?v={{cssVersion}}">
+</head>
+{{end}}

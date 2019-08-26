@@ -1,0 +1,5 @@
+config/config.json
+node_modules
+git_save
+marble-go
+tmp/*

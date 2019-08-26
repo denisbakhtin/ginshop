@@ -1,0 +1,41 @@
+{{define "orders/manager_show"}}
+{{template "admin_header" .}}
+{{template "manager_navbar" .}}
+
+<div id="one-column">
+  <h1>{{.Title}}</h1>
+  <dl class="mb-4">
+    <dt>Customer Name:</dt>
+    <dd>{{.Order.FirstName}} {{.Order.MiddleName}} {{.Order.LastName}}</dd>
+    <dt>Contact Phone:</dt>
+    <dd><a href="tel: {{tel .Order.Phone}}">{{.Order.Phone}}</a></dd>
+    <dt>Email:</dt>
+    <dd><a href="mailto:{{.Order.Email}}">{{.Order.Email}}</a></dd>
+    <dt>Date of Order:</dt>
+    <dd>{{formatDateTime .Order.CreatedAt}}</dd>
+    <dt>Customer Notes:</dt>
+    <dd>{{.Order.Comment}}</dd>
+  </dl>
+  <table class="table table-bottom-bordered">
+    <thead>
+      <tr>
+        <th class="shrink">Image</th>
+        <th>Product</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range .Order.Products}}
+        <tr>
+          <td class="shrink"><img src="{{.DefaultImage}}" class="product-image" /></td>
+          <td><a href="{{.URL}}">{{.Title}}. {{.Code}}</a></td>
+        </tr>
+      {{end}}
+    </tbody>
+  </table>
+  <div class="mt-4 text-center">
+    <a href="/manager/orders" class="btn btn-secondary">Back to List</a>
+  </div>
+</div>
+
+{{template "footer" .}}
+{{end}}

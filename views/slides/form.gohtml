@@ -1,0 +1,47 @@
+{{define "slides/form"}}
+{{template "admin_header" .}}
+{{template "admin_navbar" .}}
+
+<div id="one-column">
+  {{template "flashes" .}}
+
+  <h1>{{.Title}}</h1>
+
+  <form method="post" enctype="multipart/form-data">
+    <fieldset>
+      <legend>{{.Title}}</legend>
+      {{template "flashes" .}}
+      <input type="hidden" name="id" value="{{.Slide.ID}}">
+      <input type="hidden" name="_csrf" value="{{.Csrf}}">
+      
+      <div class="form-group">
+        <label class="control-label" for="title">Title</label>
+        <input id="title" name="title" value="{{.Slide.Title}}" class="form-control" required="" >
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="navigation_url">Navigate to</label>
+        <input id="navigation_url" name="navigation_url" value="{{.Slide.NavigationURL}}" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <input type="hidden" name="file_url" value="{{.Slide.FileURL}}" />
+        <label class="control-label" for="file_url">Image</label>
+        <input type="file" id="file_url" name="upload" accept="image/*">          
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="ord">Priority</label>
+        <input id="ord" name="ord" value="{{.Slide.Ord}}" type="number" class="form-control">
+      </div>
+      
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Save">
+        <a class="btn btn-outline-secondary" href="/admin/slides">Cancel</a>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+{{template "footer" .}}
+{{end}}

@@ -1,0 +1,15 @@
+{{define "orderconsult/confirm"}}
+{{template "header" .}}
+
+<div id="one-column" class="consult-confirm container">
+  <h1 class="text-center">{{.Title}}</h1>
+  <div class="description">
+    <p class="text-justify">
+      {{.OrderConsult.Name}}, thank You for chosing our company! Our managers will contact You as soon as possible!
+    </p>
+    <p class="text-center">Now you can return back to <a href="/">our home page</a>.</p>
+  </div>
+</div>
+
+{{template "footer" .}}
+{{end}}
