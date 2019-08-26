@@ -65,7 +65,7 @@ You can now go back to your `GOPATH` and check if everything is ok:
 
 ```
 go install github.com/denisbakhtin/amazingshop
+```
 
 # Development
 For watching go files and server restart you can use `https://github.com/pilu/fresh`. After installation run `fresh` in project directory.
-```
