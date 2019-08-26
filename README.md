@@ -22,6 +22,6 @@
 ## Custom 404, 405, 500 error pages
 ![](/public/images/error_page.jpg)
 
-#Installation
+# Installation
 
 Clone repo or use `go get` to download the project, install `npm`, run `npm install`. For the first time run the executable with `seed=true` flag to seed the database with initial demo data. See `models/seed.go` for details. Build assets with `npm run build` or watch them with `npm run watch`.
