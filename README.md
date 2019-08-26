@@ -5,6 +5,7 @@
 * 3 hardcoded user groups, for simplicity: admins, managers, customers.
 * Some nice css animations as well as animations on scroll via aos.js library.
 * Admin dashboard with CKEditor 5
+* Rss, xml sitemap
 * Breadcrumbs, product image zoom & ajax add to cart request and more...
 
 # Screenshots
