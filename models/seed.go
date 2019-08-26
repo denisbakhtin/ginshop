@@ -111,7 +111,7 @@ func SeedDB() {
 			panic(err)
 		}
 	}
-	//DEFAULT SLIDES ========================================
+	//DEFAULT CAROUSEL SLIDES ==============================
 	var slides []Slide
 	if db.Find(&slides); len(slides) == 0 {
 		slide := Slide{Title: "Demo slide Title", NavigationURL: "/", FileURL: "/public/uploads/tables.jpg"}
@@ -144,7 +144,7 @@ func SeedDB() {
 				CategoryID:  category.ID,
 				Description: "Product description goes here",
 				Published:   true,
-				Recommended: true,
+				Recommended: true, //to show the product on the home page
 				Images: []Image{
 					Image{URL: "/public/uploads/apple.jpg"},
 				},
